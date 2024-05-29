@@ -17,7 +17,7 @@ Make sure you have Node.js and npm installed on your machine. Also make sure the
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/Conv-AI/RPM-Lipsync.git
+   git clone https://github.com/wind2022storm/digital-human.git
    ```
 
 2. Navigate to the project directory:
