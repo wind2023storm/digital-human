@@ -23,7 +23,7 @@ Make sure you have Node.js and npm installed on your machine. Also make sure the
 2. Navigate to the project directory:
 
    ```bash
-   cd RPM-Lipsync
+   cd digital-human
    ```
 
 3. Install the project dependencies:
