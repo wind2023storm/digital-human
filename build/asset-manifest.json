@@ -1,19 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.cd18c99a.css",
-    "main.js": "/static/js/main.217d88ce.js",
+    "main.js": "/static/js/main.d35e0ceb.js",
     "static/media/reset.png": "/static/media/reset.cc5e10c1bd35cb415766.png",
-    "static/media/ConvaiLogo.png": "/static/media/ConvaiLogo.d7955590a6aa603cf8f4.png",
     "static/media/Thumbsup_outline.png": "/static/media/Thumbsup_outline.d1240ddfd8c2691262cf.png",
     "static/media/Thumbsdownoutline.png": "/static/media/Thumbsdownoutline.4c5b6bb37a2f03defaa7.png",
     "static/media/Thumbsdown_fill.png": "/static/media/Thumbsdown_fill.1162492cc98f7838279f.png",
     "static/media/Thumbsup_fill.png": "/static/media/Thumbsup_fill.cd881c89769ef0c221a7.png",
     "index.html": "/index.html",
     "main.cd18c99a.css.map": "/static/css/main.cd18c99a.css.map",
-    "main.217d88ce.js.map": "/static/js/main.217d88ce.js.map"
+    "main.d35e0ceb.js.map": "/static/js/main.d35e0ceb.js.map"
   },
   "entrypoints": [
     "static/css/main.cd18c99a.css",
-    "static/js/main.217d88ce.js"
+    "static/js/main.d35e0ceb.js"
   ]
 }
