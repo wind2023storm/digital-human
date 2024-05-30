@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import logo from "../../assets/ConvaiLogo.png";
 import "../../index.css";
 import ThumbsUp_fill from "../../assets/Thumbsup_fill.png";
 import Thumbsdown_fill from "../../assets/Thumbsdown_fill.png";
@@ -19,23 +18,9 @@ const ChatHistory = (props) => {
           style={{
             display: "flex",
             justifyContent: "flex-end",
-            position:"relative"
+            position: "relative",
           }}
-        >
-     
-          {history ? (
-            <img
-            loading="lazy"
-              style={{ paddingRight: "20px", marginTop: "0.9vh" }}
-              src={logo}
-              height="30px"
-              width="100px"
-              alt="convai chat history logo"
-            ></img>
-          ) : (
-            ""
-          )}
-        </div>
+        ></div>
         {!history ? (
           <PiClockClockwiseBold
             onClick={showHistory}
@@ -76,7 +61,6 @@ const ChatHistory = (props) => {
           }}
         >
           {messages?.map((message, idx) => {
-
             const isUserMessage = message.sender === "user";
             const nextMessage = messages[idx + 1];
             const isNextMessageUser =
@@ -136,13 +120,12 @@ const ChatHistory = (props) => {
                           }}
                         >
                           <img
-            loading="lazy"
-            
+                            loading="lazy"
                             style={{ paddingRight: "10px" }}
                             src={
                               feedbacks[idx] === 1
-                                ?  ThumbsUp_fill 
-                                :  Thumbsup_outline 
+                                ? ThumbsUp_fill
+                                : Thumbsup_outline
                             }
                             alt="convai chat history feedback filled"
                             height="17px"
@@ -153,11 +136,11 @@ const ChatHistory = (props) => {
                             }}
                           ></img>
                           <img
-            loading="lazy"
+                            loading="lazy"
                             src={
                               feedbacks[idx] === 2
-                                ?  Thumbsdown_fill 
-                                :  Thumbsdownoutline 
+                                ? Thumbsdown_fill
+                                : Thumbsdownoutline
                             }
                             alt="convai chat history filled"
                             height="17px"
