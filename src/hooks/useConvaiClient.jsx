@@ -1,7 +1,6 @@
 import axios from "axios";
-import {ConvaiClient} from "convai-web-sdk"
+// import {ConvaiClient} from "convai-web-sdk"
 import { useEffect, useRef, useState } from "react";
-
 
 export function useConvaiClient(characterId, apiKey) {
   const [userText, setUserText] = useState("");
@@ -13,27 +12,23 @@ export function useConvaiClient(characterId, apiKey) {
   const [avatar, setAvatar] = useState("");
   const [npcName, setNpcName] = useState("Npc");
   const [userName, setUserName] = useState("User");
-  const [facialData, setFacialData] = useState([])
-  const [emotionData, setEmotionData] = useState([])
+  const [facialData, setFacialData] = useState([]);
+  const [emotionData, setEmotionData] = useState([]);
   const [gender, setGender] = useState("MALE");
   const [userEndOfResponse, setUserEndOfResponse] = useState(false);
   // Refs
   const npcTextRef = useRef();
   const convaiClient = useRef(null);
-  const facialRef = useRef([])
+  const facialRef = useRef([]);
   const finalizedUserText = useRef();
 
   //TimeStamps
   let keyPressTime = 100;
   const [keyPressTimeStamp, setKeyPressTimeStamp] = useState();
 
-
-
-
-
   //Intializing the convai Client
   useEffect(() => {
-    convaiClient.current = new ConvaiClient({
+    convaiClient.current = new window.ConvaiClient({
       apiKey: apiKey,
       characterId: characterId,
       enableAudio: true, // use false for text only.
@@ -41,7 +36,6 @@ export function useConvaiClient(characterId, apiKey) {
       enableFacialData: true,
       // enableEmotionalData : true,
     });
-
 
     convaiClient.current.setResponseCallback((response) => {
       if (response.hasUserQuery()) {
@@ -57,32 +51,31 @@ export function useConvaiClient(characterId, apiKey) {
         }
       }
       if (response.hasAudioResponse()) {
-        if(!response?.getAudioResponse()?.getEndOfResponse()){
-        let audioResponse = response?.getAudioResponse();
-        
-        if(audioResponse){
-          // console.log(audioResponse)
-        }
-        // if(audioResponse.hasFaceEmotion()){
-        // setEmotionData(audioResponse.getFaceEmotion().array[0])
-        // }
-        if(audioResponse?.getVisemesData()?.array[0]){
-          let faceData = audioResponse?.getVisemesData().array[0];
-          if(faceData[0] !== -2){
-          facialRef.current.push(faceData)
-          setFacialData(facialRef.current)
+        if (!response?.getAudioResponse()?.getEndOfResponse()) {
+          let audioResponse = response?.getAudioResponse();
+
+          if (audioResponse) {
+            // console.log(audioResponse)
+          }
+          // if(audioResponse.hasFaceEmotion()){
+          // setEmotionData(audioResponse.getFaceEmotion().array[0])
+          // }
+          if (audioResponse?.getVisemesData()?.array[0]) {
+            let faceData = audioResponse?.getVisemesData().array[0];
+            if (faceData[0] !== -2) {
+              facialRef.current.push(faceData);
+              setFacialData(facialRef.current);
+            }
+          }
+          npcTextRef.current += " " + audioResponse.getTextData();
+          setNpcText(npcTextRef.current);
+          if (audioResponse) {
+            setIsTalking(true);
           }
         }
-        npcTextRef.current += " " + audioResponse.getTextData();
-        setNpcText(npcTextRef.current);
-        if (audioResponse) {
-          setIsTalking(true);
-        }
-        }
-        if(response.getAudioResponse()?.getEndOfResponse()){
+        if (response.getAudioResponse()?.getEndOfResponse()) {
           setUserEndOfResponse(true);
         }
-      
       }
     });
 
@@ -120,8 +113,8 @@ export function useConvaiClient(characterId, apiKey) {
     convaiClient.current.onAudioStop(() => {
       setAudioPlay(false);
       // setFacialData([]);
-          facialRef.current = [];
-          setFacialData([]);
+      facialRef.current = [];
+      setFacialData([]);
     });
   }, []);
 
@@ -151,7 +144,7 @@ export function useConvaiClient(characterId, apiKey) {
       setNpcText("");
       convaiClient.current.startAudioChunk();
       // Record the timestamp of the key Pressed
-      setKeyPressTimeStamp(Date.now())
+      setKeyPressTimeStamp(Date.now());
     }
   }
 
@@ -168,18 +161,17 @@ export function useConvaiClient(characterId, apiKey) {
       e.preventDefault();
       const elapsedTime = Date.now() - keyPressTimeStamp;
       //if elapsedTime less then 100ms
-      if(elapsedTime< keyPressTime){
-        setTimeout(()=>{
-          if(convaiClient.current && keyPressed){
-           setKeyPressed(false);
-           convaiClient.current.endAudioChunk();
+      if (elapsedTime < keyPressTime) {
+        setTimeout(() => {
+          if (convaiClient.current && keyPressed) {
+            setKeyPressed(false);
+            convaiClient.current.endAudioChunk();
           }
-        },keyPressTime)
-      }else{
-           setKeyPressed(false);
-           convaiClient.current.endAudioChunk();
+        }, keyPressTime);
+      } else {
+        setKeyPressed(false);
+        convaiClient.current.endAudioChunk();
       }
-
     }
   }
 
@@ -235,7 +227,7 @@ export function useConvaiClient(characterId, apiKey) {
     setEmotionData,
     userEndOfResponse,
     facialRef,
-    setUserEndOfResponse
+    setUserEndOfResponse,
   };
 
   return { client };
